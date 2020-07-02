@@ -1,0 +1,22 @@
+name: Publish Docker image
+on:
+  release:
+    types: [published]
+  pull_request:
+    branches: [master, dev,dev1]
+    
+jobs:
+  build:
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: vishalgoney20
+          password: mygitpassword@1234
+          registry: docker.pkg.github.com
+          repository: vishalgoney20/docker/
+          tag_with_ref: true
